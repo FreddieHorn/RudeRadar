@@ -1,2 +1,3 @@
 /src/__pycache__
 /checkpoints/DistilBERT-NAT-NP-WITH_SCHEDULER_RUN2_NO_FREEZE-epoch=19-val_loss=0.03.ckpt
+/src/model_backend/__pycache__
