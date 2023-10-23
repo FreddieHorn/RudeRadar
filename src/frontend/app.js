@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Simulate sending the text to the backend for analysis.
         // Replace this with your actual backend API call.
         //const dummyScore = Math.random() * 2 - 1; // Generate a random score between -1 and 1.
-        fetch("http://localhost:3000/analyze", {
+        fetch("http://127.0.0.1:8000/model_predict", {
             method: "POST", // Use the appropriate method (GET, POST, etc.) for your API.
             headers: {
                 "Content-Type": "application/json",
