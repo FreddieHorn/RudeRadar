@@ -5,6 +5,9 @@ from pydantic import BaseModel
 
 from model.inference import RudenessDeterminator
 
+class Item(BaseModel):
+    text: str
+
 
 app = FastAPI()
 rudness_determinator = RudenessDeterminator()
@@ -16,9 +19,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-class Item(BaseModel):
-    text: str
 
 @app.get("/")
 async def root():
