@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const recordsButton = document.getElementById("recordsButton");
     const homeContent = document.getElementById("homeContent");
     const recordsContent = document.getElementById("recordsContent");
+    const recordsTable = document.getElementById("recordsTable").getElementsByTagName('tbody')[0];
     
     homeButton.addEventListener("click", () => {
         homeContent.style.display = "block";
@@ -16,9 +17,29 @@ document.addEventListener("DOMContentLoaded", function () {
     recordsButton.addEventListener("click", () => {
         homeContent.style.display = "none";
         recordsContent.style.display = "block";
-
+        
         recordsButton.classList.add("active");
         homeButton.classList.remove("active");
+
+                // You can make an API call here to retrieve records from the database
+        // For this example, I'll use dummy records
+        const dummyRecords = [
+            { text: "I hate you!", score: 0.75 },
+            { text: "Have an okay day", score: -0.5 },
+            { text: "I don't know about that", score: 0.25 },
+        ];
+
+        // Clear existing table rows
+        recordsTable.innerHTML = "";
+
+        // Populate the table with the records
+        dummyRecords.forEach((record) => {
+            const row = recordsTable.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = record.text;
+            cell2.textContent = record.score.toFixed(2);
+        });
     });
 
     const inputText = document.getElementById("inputText");

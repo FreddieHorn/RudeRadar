@@ -61,6 +61,39 @@ button {
     background-color: #0077cc;
 }
 
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+/* Style for table headers */
+table th {
+    background-color: #0077cc;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Style for table data cells */
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Apply alternating background color to table rows for better readability */
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Increase font size for better visibility */
+table th, table td {
+    font-size: 16px;
+}
+
 /* .container2 {
     margin-top: 40px;
 } */
