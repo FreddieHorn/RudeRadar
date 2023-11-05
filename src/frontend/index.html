@@ -7,13 +7,30 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Sentiment Analyzer</h1>
-        <input type="text" id="inputText" placeholder="Enter your text...">
-        <button id="analyzeButton">Analyze</button>
-        <div class="result">
-            <p id="score">Score: -</p>
-        </div>
+    <div class="navbar">
+        <button id="homeButton">Home</button>
+        <button id="recordsButton">Records</button>
+    </div>
+    <div class="container" id="homeContent">
+            <h1>Sentiment Analyzer</h1>
+            <input type="text" id="inputText" placeholder="Enter your text...">
+            <button id="analyzeButton">Analyze</button>
+            <div class="result">
+                <p id="score">Score: -</p>
+            </div>
+            <div class="loading-bar" id="loadingBar"></div>
+    </div>
+    <div class="container" id="recordsContent" style="display: none;">
+        <button id="getRecordsButton">Get Records</button>
+        <table id="recordsTable">
+            <thead>
+                <tr>
+                    <th>Text</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
     <script src="app.js"></script>
