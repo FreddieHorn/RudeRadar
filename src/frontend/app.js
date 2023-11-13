@@ -23,23 +23,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // You can make an API call here to retrieve records from the database
         // For this example, I'll use dummy records
-        const dummyRecords = [
-            { text: "I hate you!", score: 0.75 },
-            { text: "Have an okay day", score: -0.5 },
-            { text: "I don't know about that", score: 0.25 },
-        ];
+        // const dummyRecords = [
+        //     { text: "I hate you!", score: 0.75 },
+        //     { text: "Have an okay day", score: -0.5 },
+        //     { text: "I don't know about that", score: 0.25 },
+        // ];
 
-        // Clear existing table rows
-        recordsTable.innerHTML = "";
+        fetchRecords();
 
-        // Populate the table with the records
-        dummyRecords.forEach((record) => {
-            const row = recordsTable.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = record.text;
-            cell2.textContent = record.score.toFixed(2);
-        });
+        // // Clear existing table rows
+        // recordsTable.innerHTML = "";
+
+        // // Populate the table with the records
+        // dummyRecords.forEach((record) => {
+        //     const row = recordsTable.insertRow();
+        //     const cell1 = row.insertCell(0);
+        //     const cell2 = row.insertCell(1);
+        //     cell1.textContent = record.text;
+        //     cell2.textContent = record.score.toFixed(2);
+        // });
     });
 
     const inputText = document.getElementById("inputText");
@@ -89,5 +91,36 @@ document.addEventListener("DOMContentLoaded", function () {
         const hue = (1 - score) * 60;
         //const hue = (score + 1) * 60; // Map score to a hue between 0 (green) and 120 (red).
         return `hsl(${hue}, 70%, 70%)`; // Adjust saturation and lightness as needed.
+    }
+
+    // Add this function to your existing JavaScript code
+    function fetchRecords() {
+        fetch("http://localhost:8000/get_records")
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("API request failed");
+                }
+            })
+            .then((data) => {
+                const records = data.records;
+
+                // Clear existing table rows
+                const recordsTable = document.getElementById("recordsTable").getElementsByTagName('tbody')[0];
+                recordsTable.innerHTML = "";
+
+                // Populate the table with the fetched records
+                records.forEach((record) => {
+                    const row = recordsTable.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    cell1.textContent = record.text;
+                    cell2.textContent = record.score.toFixed(2);
+                });
+            })
+            .catch((error) => {
+                console.error("API call error:", error);
+            });
     }
 });
