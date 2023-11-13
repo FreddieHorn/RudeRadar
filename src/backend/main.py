@@ -38,14 +38,29 @@ async def root():
     return {"message": "This is a microservice responsible for inference on the trained model, which determines rudeness level of the queried text"}
 
 @app.post("/model_predict")
-async def get_rudeness_level(item: Item):  
-    return {"score" : rudness_determinator.measure_rudeness(item.text)}
+async def get_rudeness_level(item: Item):
+    score = rudness_determinator.measure_rudeness(item.text)
+    msg = send_data(text=item.text, score=score)
+    print(msg)
+    return {"score" : score}
 
 @app.get("/read_data/")
 async def read_data():
     cursor = collection.find({})    
     data = list(cursor)
     return {"data": dumps(data)}
+
+@app.get("/get_records/")
+async def get_records():
+    cursor = collection.find({})
+    transformed_data = []
+    
+    for item in cursor:
+        # Transform MongoDB document to the desired format
+        record = {"text": item["text"], "score": item["score"]}
+        transformed_data.append(record)
+    
+    return {"records": transformed_data}
 
 # Create an endpoint to send data to MongoDB
 @app.post("/send_data/")
